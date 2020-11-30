@@ -1,0 +1,130 @@
+<div class="container mt-5">
+  <div class="row">
+    <h4 class="text-center text-muted font-weight-bold">
+      {{ produto.nomeProduto }}
+    </h4>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row mt-2">
+    <div
+      class="col-md-8 col-12 mx-auto d-flex justify-content-center border w-100 shadow"
+    >
+      <img
+        class="img-fluid"
+        src="{{ produto.imagemProduto }}"
+        alt="Imagem do produto"
+      />
+    </div>
+
+    <div class="col-md-4 col-12 pl-md-2 px-0">
+      <div class="bg-white shadow w-100 p-5 border">
+        <h3>
+          Preço:
+          <br /><br />
+          <span class="text-success">
+            {{
+              produto.precoProduto.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL"
+              })
+            }}</span
+          >
+          à vista
+        </h3>
+        <br />
+        <p class="">{{ produto.nomeProduto }}</p>
+        <div>
+          <small class="text-muted">Quantidade em estoque: </small
+          >{{ produto.estoqueProduto }}
+        </div>
+        <small class="text-muted">Marca: {{ produto.marcaProduto }}</small>
+      </div>
+
+      <div class="p-2 mt-3">
+        <button
+          (click)="adicionarCarrinho(produto)"
+          class="btn btn-lg btn-green w-100 shadow"
+          routerLink="/carrinho"
+          role="button"
+        >
+          <i class="fas fa-shopping-cart mr-2 shadow"></i>
+          Comprar
+        </button>
+      </div>
+      <div class="p-2">
+        <button
+          class="btn btn-lg btn-blue w-100 shadow"
+          (click)="adicionarCarrinho(produto)"
+          role="button"
+        >
+          <i class="fas fa-heart mr-2 shadow"></i>Doar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 mb-5 px-0">
+  <div class="card shadow w-100 p-5" style="width: 19rem">
+    <h3>Descrição</h3>
+    <hr />
+    <strong class="mb-3">{{ produto.nomeProduto }}</strong>
+    <p class="card-text lead w-100">
+      {{ produto.descricaoProduto }}
+    </p>
+    <small class="text-muted mt-3">Marca: {{ produto.marcaProduto }}</small>
+  </div>
+</div>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <h3>Alguns produtos que podem te interessar...</h3>
+    </div>
+
+    <div class="row justify-content-center">
+      <div *ngFor="let item of listaProduto">
+        <div class="container-card">
+          <div class="card mx-2 my-2">
+            <a
+              (click)="getProduto(item.idProduto)"
+              class="imgBx cursor-pointer"
+            >
+              <img src="{{ item.imagemProduto }}" alt="Produto" />
+            </a>
+            <div class="contentBx">
+              <h2>{{ item.nomeProduto }}</h2>
+              <strong class="lead text-primary font-weight-bold price">
+                {{
+                  item.precoProduto.toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL"
+                  })
+                }}</strong
+              >
+              <a
+                class="lead text-success cursor-pointer"
+                (click)="adicionarCarrinho(item)"
+                >Adicionar ao Carrinho</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid p-5">
+  <div class="d-flex justify-content-end">
+    <a (click)="scrollTop()" class="button cursor-pointer">
+      <img
+        style="height: 50px; width: 50px"
+        src="assets/up-arrow.png"
+        alt="Up Arrow"
+    /></a>
+  </div>
+</div>
+

@@ -1,0 +1,211 @@
+<nav class="navbar navbar-expand-lg bg-green-dark">
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav w-100 d-flex justify-content-between">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-white"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <fa-icon [icon]="faBars" class="faCartPlus fa-1x p-3"></fa-icon>
+            Menu
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a
+              *ngFor="let item of listaCategoria"
+              class="dropdown-item cursor-pointer"
+              (click)="findAllByCategoria(item)"
+              >{{ item }}</a
+            >
+            <a class="dropdown-item cursor-pointer" (click)="findAllProduto()"
+              >Todos</a
+            >
+          </div>
+        </li>
+        <div class="d-flex">
+          <li class="nav-item mr-5">
+            <a class="nav-link text-white" href="#" routerLink="/sobre"
+              >Quem somos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-white"
+              href="https://wa.me/5511981238234O?text=Sejam bem-vindes ao chat da HelpPet!%20Em%20que%20podemos%20te%20ajudar?%20:)"
+              target="_blank:"
+              >Entre em contato&ensp;<img
+                style="height: 25px; width: 25px"
+                src="assets/whatsapp.png"
+                alt="whatsapp"
+            /></a>
+
+            <!-- <a
+              class="nav-link text-white"
+              href="https://wa.me/5511981238234O?text=Sejam bem-vindes ao chat da HelpPet!%20Em%20que%20podemos%20te%20ajudar?%20:)"
+              target="_blank:"
+              >Entre em contato&ensp;<img
+                style="height: 25px; width: 25px"
+                src="assets/whatsapp.png"
+                alt="whatsapp"
+            /></a> -->
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--container-->
+<div class="container-fluid w-100 p-0">
+  <!--Carousel-->
+  <div
+    id="carouselExampleIndicators"
+    class="carousel slide d-none d-md-block"
+    data-ride="carousel"
+  >
+    <ol class="carousel-indicators">
+      <li
+        data-target="#carouselExampleIndicators"
+        data-slide-to="0"
+        class="active"
+      ></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img
+          class="d-block w-100"
+          style="height: 280px; width: 700px"
+          src="https://cobasi.vteximg.com.br/arquivos/ids/361197/SUPER-BLACK-NOVEMBER-DESKTOP-03-11.gif?v=637396810744300000"
+          alt="Primeiro Slide"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          class="d-block w-100"
+          style="height: 280px; width: 700px"
+          src="https://cobasi.vteximg.com.br/arquivos/ids/363991/BLACK-70-OFF-DESKTOP.gif?v=637401123180000000"
+          alt="Segundo Slide"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          class="d-block w-100"
+          style="height: 280px; width: 700px"
+          src="https://cobasi.vteximg.com.br/arquivos/ids/366625/BEBEDOURO-DESKTOP-10-11.png?v=637405456117900000"
+          alt="Terceiro Slide"
+        />
+      </div>
+    </div>
+    <a
+      class="carousel-control-prev"
+      href="#carouselExampleIndicators"
+      role="button"
+      data-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Anterior</span>
+    </a>
+    <a
+      class="carousel-control-next"
+      href="#carouselExampleIndicators"
+      role="button"
+      data-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Próximo</span>
+    </a>
+  </div>
+  <!--/Carousel-->
+</div>
+<!--/container-->
+
+<div class="container-fluid">
+  <!--container-->
+  <div class="container">
+    <div class="row mt-5 justify-content-center">
+      <div class="col-12">
+        <h2 class="text-center font-weight-bold text-green mb-5">
+          Nossas Promoções
+        </h2>
+      </div>
+      <a routerLink="/produto" class="col-8 col-md-4 mb-3 card-hover">
+        <img
+          src="assets/img-promocoes/card-brinquedo.gif"
+          alt="Promoção"
+          class="img-fluid rounded"
+        />
+      </a>
+      <a routerLink="/produto" class="col-8 col-md-4 mb-3 card-hover">
+        <img
+          src="assets/img-promocoes/card-cadeira.gif"
+          alt="Promoção"
+          class="img-fluid rounded"
+        />
+      </a>
+      <a routerLink="/produto" class="col-8 col-md-4 mb-3 card-hover">
+        <img
+          src="assets/img-promocoes/card-casinha.gif"
+          alt="Promoção"
+          class="img-fluid rounded"
+        />
+      </a>
+    </div>
+  </div>
+
+  <div class="row w-100 mt-5">
+    <div class="col-md-12">
+      <h2 class="text-center font-weight-bold text-green mb-5">
+        Nossos Produtos
+      </h2>
+    </div>
+  </div>
+
+  <!--container-->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div *ngFor="let item of listaProduto">
+        <div class="container">
+          <div class="card mb-4">
+            <a [routerLink]="['/produto', item.idProduto]" class="imgBx">
+              <img src="{{ item.imagemProduto }}" alt="Produto" />
+            </a>
+            <div class="contentBx">
+              <h2>{{ item.nomeProduto }}</h2>
+              <strong class="lead text-primary font-weight-bold price">
+                {{
+                  item.precoProduto.toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL"
+                  })
+                }}</strong
+              >
+              <a
+                class="lead text-success cursor-pointer"
+                (click)="adicionarCarrinho(item)"
+                >Adicionar ao Carrinho</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/container-->
+
+  <div class="container-fluid p-5">
+    <div class="d-flex justify-content-end">
+      <a (click)="scrollTop()" class="button">
+        <img
+          style="height: 50px; width: 50px"
+          src="assets/up-arrow.png"
+          alt="Up Arrow"
+      /></a>
+    </div>
+  </div>
+</div>

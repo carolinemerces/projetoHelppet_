@@ -1,0 +1,182 @@
+<div *ngIf="carrinhoVazio()">
+  <h2 class="m-5 font-weight-bold text-muted">Carrinho Vazio</h2>
+</div>
+
+<div *ngIf="!carrinhoVazio()">
+  <div class="container-fluid mt-5 text-center d-none d-lg-block">
+    <div class="row">
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Produtos</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Nome do produto</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Preço</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Quantidade</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Remover</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Total</p>
+      </div>
+    </div>
+  </div>
+  <!-- Carrinho Items -->
+  <div class="container-fluid">
+    <div *ngFor="let item of listaProdutos">
+      <div class="row my-3 text-capitalize text-center">
+        <div class="col-10 mx-auto col-lg-2">
+          <img
+            src="{{ item.imagemProduto }}"
+            style="display: 5rem; height: 5rem"
+            alt="produto"
+            class="img-fluid rounded-circle card-hover"
+          />
+        </div>
+
+        <div class="col-10 mx-auto col-lg-2">
+          <span class="d-lg-none">Produto: </span>
+          {{ item.nomeProduto }}
+        </div>
+
+        <div class="col-10 mx-auto col-lg-2">
+          <span class="d-lg-none">Preço: </span>
+          {{
+            item.precoProduto.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL"
+            })
+          }}
+        </div>
+
+        <div class="col-10 mx-auto col-lg-2">
+          <div class="col-10 mx-auto col-lg-2 my-2 my-lg-0">
+            <div class="d-flex justify-content-center">
+              <span
+                class="btn btn-outline-dark mx-1"
+                (click)="removeQuantidade(item.idProduto)"
+                >-</span
+              >
+              <span class="btn btn-outline-dark mx-1">{{
+                item.quantidade
+              }}</span>
+              <span
+                class="btn btn-outline-dark mx-1"
+                (click)="addQuantidade(item.idProduto)"
+              >
+                +
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-10 mx-auto col-lg-2">
+          <div class="cart-icon cursor-pointer">
+            <i
+              class="fas fa-trash text-danger"
+              (click)="removeProduto(item.idProduto)"
+            ></i>
+          </div>
+        </div>
+
+        <div class="col-10 mx-auto col-lg-2">
+          <strong class="d-lg-none">Total: </strong>
+          <strong>{{
+            item.precoProduto.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL"
+            })
+          }}</strong>
+        </div>
+        <div class="col-12">
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Total -->
+<div class="container">
+  <div class="row">
+    <div
+      class="col-10 col-lg-6 mx-auto ml-md-auto mr-sm-0 my-5 text-capitalize card shadow bg-light p-5"
+    >
+      <h4 class="mb-4">Resumo do pedido</h4>
+      <h5 class="d-flex justify-content-between">
+        <span class="text-title"> subtotal: </span>
+        <strong>
+          {{
+            subTotal.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL"
+            })
+          }}</strong
+        >
+      </h5>
+      <h5 class="d-flex justify-content-between">
+        <span class="text-title"> frete: </span>
+        <strong>
+          {{
+            frete.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL"
+            })
+          }}</strong
+        >
+      </h5>
+      <h5 class="d-flex justify-content-between">
+        <span class="text-title"> total: </span>
+        <strong>
+          {{
+            total.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL"
+            })
+          }}</strong
+        >
+      </h5>
+      <hr />
+      <div class="d-flex flex-column">
+        <a>
+          <button
+            (click)="limparCarrinho()"
+            class="btn btn-danger text-uppercase mb-3 px-5 w-100 shadow"
+            type="button"
+          >
+            <i class="fas fa-ban mr-3"></i>
+            <span class="d-md-inline d-none">Esvaziar Carrinho</span>
+          </button>
+        </a>
+        <a>
+          <button
+            class="btn btn-green btn-lg text-uppercase mb-3 px-5 w-100 shadow"
+            type="button"
+            (click)="compraIniciada()"
+          >
+            <i class="fas fa-shopping-basket mr-3"></i>
+            Comprar
+          </button>
+        </a>
+        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="finalizarCompra">
+  <div
+    class="container-fluid modal-compra height-100 d-flex flex-column align-items-center justify-content-center"
+  >
+    <i class="fas fa-check-circle"></i>
+    <h1>Compra Realizada com sucesso</h1>
+    <p>
+      Sua compra foi finalizada com sucesso. Iremos processar o seu pedido e em
+      breve entraremos em contato para mais detalhes.
+    </p>
+    <button (click)="compraFinalizada()">OK</button>
+  </div>
+</div>

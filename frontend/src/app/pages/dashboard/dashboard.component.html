@@ -1,0 +1,291 @@
+<div class="container-fluid my-5">
+  <div class="row">
+    <ul class="nav mx-5 nav-tabs w-100" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active cursor-pointer text-muted font-weight-bold"
+          id="home-tab"
+          data-toggle="tab"
+          (click)="changeTab()"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+          >Produtos</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link cursor-pointer text-muted font-weight-bold"
+          id="profile-tab"
+          data-toggle="tab"
+          (click)="changeTab()"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+          >Categorias</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- produtos -->
+<div *ngIf="showProdutos">
+  <h2 class="d-flex justify-content-center mt-4 font-weight-bold text-green">
+    Produtos
+  </h2>
+  <div class="container-fluid mt-5 text-center d-none d-lg-block">
+    <div class="row">
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Imagem Produto</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Produto</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-1">
+        <p class="text-uppercase font-weight-bold">Preço R$</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Quantidade</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-2">
+        <p class="text-uppercase font-weight-bold">Editar</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-1">
+        <p class="text-uppercase font-weight-bold">Deletar</p>
+      </div>
+    </div>
+  </div>
+  <!-- Cadastro Itens -->
+  <div class="container-fluid">
+    <div
+      *ngFor="let item of listaProduto"
+      class="row my-3 text-capitalize text-center"
+    >
+      <div class="col-10 mx-auto col-lg-2">
+        <img
+          src="{{ item.imagemProduto }}"
+          style="display: 5rem; height: 5rem"
+          alt="produto"
+          class="img-fluid rounded-circle card-hover"
+        />
+      </div>
+
+      <div class="col-10 mx-auto col-lg-2">
+        <span class="d-lg-none">Produto: </span>
+        {{ item.nomeProduto }}
+      </div>
+
+      <div class="col-10 mx-auto col-lg-1">
+        <span class="d-lg-none">Preço: </span>
+        R$ {{ item.precoProduto }}
+      </div>
+
+      <div class="col-10 mx-auto col-lg-2">
+        <div class="col-10 mx-auto col-lg-2 my-2 my-lg-0">
+          <div class="d-flex justify-content-center">
+            <span>{{ item.estoqueProduto }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-10 mx-auto col-lg-2">
+        <a [routerLink]="['/put-produto', item.idProduto]">
+          <i class="fas fa-edit text-warning cursor-pointer"></i>
+        </a>
+      </div>
+
+      <div class="col-10 mx-auto col-lg-1">
+        <!-- Button trigger modal -->
+        <a
+          (click)="armazenarId(item.idProduto)"
+          type="button"
+          class="cursor-pointer"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          <i class="fas fa-trash text-danger cursor-pointer"></i>
+        </a>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header border-0">
+                <h5
+                  class="modal-title font-weight-bold text-muted"
+                  id="exampleModalLabel"
+                >
+                  Deletar
+                </h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Tem certeza que deseja deletar este produto?
+              </div>
+              <div class="modal-footer border-0">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-green"
+                  data-dismiss="modal"
+                  (click)="btnSimProduto()"
+                >
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <hr />
+      </div>
+    </div>
+
+    <div class="row align-items-center justify-content-center mb-5">
+      <a routerLink="/form-produto" class="btn btn-blue shadow"
+        >Cadastrar Novo Produto
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- /produtos -->
+
+<!-- Categorias -->
+<div *ngIf="!showProdutos">
+  <h2
+    class="d-flex justify-content-center p-3 mt-4 font-weight-bold text-green"
+  >
+    Categorias
+  </h2>
+  <div class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">SEÇÃO</th>
+          <th scope="col">SUB-SEÇÃO</th>
+          <th scope="col">ANIMAL</th>
+          <th scope="col">EDITAR</th>
+          <th scope="col">REMOVER</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listaCategoria">
+          <td scope="row">{{ item.idCategoria }}</td>
+          <td>{{ item.secaoCategoria }}</td>
+          <td>{{ item.subSecaoCategoria }}</td>
+          <td>{{ item.animalCategoria }}</td>
+          <td>
+            <a [routerLink]="['/put-categoria', item.idCategoria]"
+              ><i class="fas fa-edit text-warning cursor-pointer"></i
+            ></a>
+          </td>
+          <td>
+            <!-- Button trigger modal -->
+            <div
+              (click)="armazenarId(item.idCategoria)"
+              type="button"
+              class="cursor-pointer"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              <i class="fas fa-trash text-danger cursor-pointer"></i>
+            </div>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <h5
+                      class="modal-title font-weight-bold text-muted"
+                      id="exampleModalLabel"
+                    >
+                      Deletar
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+<<<<<<< HEAD
+                    Tem certeza que deseja deletar esta categoria?
+=======
+                    Tem Certeza Que Deseja Remover Esta Categoria?
+>>>>>>> ae8eedcbd351b2de030e2e56df3e15eb2eaa7e8c
+                  </div>
+                  <div class="modal-footer border-0">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-green"
+                      data-dismiss="modal"
+                      (click)="btnSimCategoria()"
+                    >
+                      Confirmar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <div class="row p-5 align-items-center justify-content-center">
+      <a routerLink="/form-categoria" class="btn btn-blue shadow"
+        >Cadastrar Nova Categoria
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid p-5">
+  <div class="d-flex justify-content-end">
+    <a (click)="scrollTop()" class="button cursor-pointer">
+      <img
+        style="height: 50px; width: 50px"
+        src="assets/up-arrow.png"
+        alt="Up Arrow"
+    /></a>
+  </div>
+</div>
+<!-- /Categorias -->

@@ -1,0 +1,20 @@
+a {
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.fb-ic:hover {
+  color: #4064ac !important;
+}
+
+.tw-ic:hover {
+  color: #29a4d9 !important;
+}
+
+.li-ic:hover {
+  color: #0270ad !important;
+}
+
+.ins-ic:hover {
+  color: #e42047 !important;
+}

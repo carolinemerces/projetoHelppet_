@@ -1,0 +1,105 @@
+:root {
+  --color-green: #04bf58;
+  --color-green-secondary: #2f995f;
+  --color-blue: #007dc5;
+  --color-blue-secondary: #007dc5;
+  --color-gray-dark: #272727;
+  --color-gray: #545454;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Work Sans, sans-serif;
+}
+
+* {
+  font-family: Roboto, sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.bg-green {
+  background-color: var(--color-green);
+}
+
+.bg-green-dark {
+  background-color: var(--color-green-secondary);
+}
+
+.bg-blue {
+  background-color: var(--color-blue);
+}
+
+.bg-blue-dark {
+  background-color: var(--color-blue-secondary);
+}
+
+.bg-gray {
+  background-color: var(--color-gray);
+}
+
+.bg-gray-dark {
+  background-color: var(--color-gray-dark);
+}
+
+.btn-green {
+  background-color: var(--color-green) !important;
+  color: #fff !important;
+}
+
+.text-green {
+  color: #07b154;
+}
+
+.btn-blue {
+  background-color: var(--color-blue) !important;
+  color: #fff !important;
+}
+
+.btn-green:hover {
+  opacity: 0.8;
+}
+
+.btn-blue:hover {
+  opacity: 0.8;
+}
+
+.height-100 {
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url(/assets/background-gradiente1.svg);
+}
+
+.bg-cadastro {
+  background-image: url(/assets/cadastro.svg);
+}
+
+.bg-login {
+  background-image: url(/assets/login1.svg);
+}
+
+.card-hover {
+  cursor: pointer;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  object-fit: contain;
+}
+
+.card-hover:hover {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(5.1);
+  transform: scale(1.1);
+}
